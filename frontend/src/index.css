@@ -237,17 +237,18 @@ button, a, input, textarea {
     }
 }
 
-/* Member Area Styles - Watercolor Background with Botanicals */
+/* =============================================
+   MEMBER AREA - Peaceful Sanctuary Design
+   ============================================= */
+
+/* Painterly watercolor background */
 .member-bg {
-    background: 
-        linear-gradient(135deg, rgba(232, 239, 229, 0.7) 0%, rgba(245, 243, 239, 0.6) 50%, rgba(229, 235, 231, 0.7) 100%),
-        url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80&fit=crop') center/cover fixed;
-    background-attachment: fixed;
     position: relative;
     min-height: 100vh;
+    background: #E8E4DC;
 }
 
-/* Soft watercolor overlay */
+/* Base layer - soft earthy tones */
 .member-bg::before {
     content: '';
     position: fixed;
@@ -256,86 +257,159 @@ button, a, input, textarea {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(ellipse at 85% 35%, rgba(90, 125, 105, 0.12) 0%, transparent 45%),
-        radial-gradient(ellipse at 15% 75%, rgba(139, 169, 143, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 60%),
-        linear-gradient(180deg, rgba(250, 249, 246, 0.85) 0%, rgba(245, 243, 239, 0.75) 50%, rgba(240, 238, 232, 0.85) 100%);
+        /* Soft light from top right - like morning sun */
+        radial-gradient(ellipse 80% 60% at 85% 15%, rgba(255, 253, 245, 0.9) 0%, transparent 55%),
+        /* Sage green wash - top area */
+        radial-gradient(ellipse 120% 80% at 20% 10%, rgba(139, 169, 143, 0.25) 0%, transparent 50%),
+        /* Warm beige glow - center */
+        radial-gradient(ellipse 100% 100% at 50% 60%, rgba(222, 211, 190, 0.4) 0%, transparent 60%),
+        /* Soft clay accent - bottom */
+        radial-gradient(ellipse 90% 50% at 30% 90%, rgba(198, 175, 155, 0.3) 0%, transparent 50%),
+        /* Muted olive depth - left side */
+        radial-gradient(ellipse 60% 80% at 5% 50%, rgba(128, 128, 105, 0.15) 0%, transparent 50%),
+        /* Base warm tone */
+        linear-gradient(175deg, 
+            #EAE6DE 0%, 
+            #E5E0D5 20%,
+            #DED8CC 40%,
+            #E2DDD3 60%,
+            #E8E3D9 80%,
+            #EBE7DF 100%
+        );
     pointer-events: none;
     z-index: 0;
 }
 
-/* Cross silhouette in background - more visible */
+/* Organic texture overlay - subtle paper/canvas feel */
 .member-bg::after {
     content: '';
     position: fixed;
-    right: 8%;
-    top: 25%;
-    width: 100px;
-    height: 150px;
-    background: linear-gradient(180deg, rgba(90, 125, 105, 0.15) 0%, rgba(90, 125, 105, 0.08) 100%);
-    clip-path: polygon(40% 0%, 60% 0%, 60% 35%, 100% 35%, 100% 50%, 60% 50%, 60% 100%, 40% 100%, 40% 50%, 0% 50%, 0% 35%, 40% 35%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
     pointer-events: none;
     z-index: 0;
 }
 
+/* Sidebar - natural sage gradient */
 .member-sidebar {
-    background: linear-gradient(180deg, #5A7D69 0%, #4A6855 50%, #3D5847 100%);
+    background: linear-gradient(180deg, 
+        #6B8F7A 0%, 
+        #5A7D69 30%,
+        #4A6855 70%,
+        #3D5847 100%
+    );
     position: relative;
     z-index: 10;
+    box-shadow: 4px 0 24px -4px rgba(61, 88, 71, 0.2);
 }
 
+/* Content area with botanical accents */
 .member-content-area {
     position: relative;
     z-index: 1;
 }
 
-/* Botanical leaf decoration - bottom left corner */
+/* Soft botanical leaves - bottom left */
 .member-content-area::before {
     content: '';
     position: fixed;
-    bottom: 0;
-    left: 200px;
-    width: 300px;
-    height: 250px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 250'%3E%3Cpath d='M50 250 Q70 200 60 150 Q80 180 100 140 Q90 100 120 80' fill='none' stroke='%235A7D69' stroke-width='2' opacity='0.3'/%3E%3Cpath d='M80 250 Q100 210 95 170 Q115 190 130 160 Q125 130 150 110' fill='none' stroke='%235A7D69' stroke-width='1.5' opacity='0.25'/%3E%3Cpath d='M30 250 Q45 220 40 180 Q55 200 65 170' fill='none' stroke='%236B8F7A' stroke-width='1.5' opacity='0.2'/%3E%3Cellipse cx='60' cy='145' rx='15' ry='25' fill='%235A7D69' opacity='0.1' transform='rotate(-20 60 145)'/%3E%3Cellipse cx='100' cy='135' rx='12' ry='20' fill='%235A7D69' opacity='0.08' transform='rotate(-30 100 135)'/%3E%3Cellipse cx='45' cy='175' rx='10' ry='18' fill='%236B8F7A' opacity='0.1' transform='rotate(-15 45 175)'/%3E%3C/svg%3E");
+    bottom: -20px;
+    left: 180px;
+    width: 350px;
+    height: 300px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 300'%3E%3Cdefs%3E%3ClinearGradient id='leafGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%235A7D69;stop-opacity:0.2'/%3E%3Cstop offset='100%25' style='stop-color:%234A6855;stop-opacity:0.08'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Main stem --%3E%3Cpath d='M80 300 Q95 240 85 180 Q105 210 120 160 Q110 120 140 90' fill='none' stroke='%235A7D69' stroke-width='2' opacity='0.2' stroke-linecap='round'/%3E%3C!-- Secondary stem --%3E%3Cpath d='M50 300 Q65 250 55 200 Q75 225 85 180' fill='none' stroke='%236B8F7A' stroke-width='1.5' opacity='0.15' stroke-linecap='round'/%3E%3C!-- Leaf shapes --%3E%3Cellipse cx='88' cy='175' rx='18' ry='32' fill='url(%23leafGrad)' transform='rotate(-25 88 175)'/%3E%3Cellipse cx='125' cy='155' rx='14' ry='26' fill='url(%23leafGrad)' transform='rotate(-35 125 155)'/%3E%3Cellipse cx='60' cy='195' rx='12' ry='22' fill='%235A7D69' opacity='0.08' transform='rotate(-15 60 195)'/%3E%3Cellipse cx='145' cy='130' rx='10' ry='18' fill='%235A7D69' opacity='0.06' transform='rotate(-40 145 130)'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: contain;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.8;
+    opacity: 1;
 }
 
-/* Top right botanical accent */
+/* Soft botanical accent - top right */
 .member-content-area::after {
     content: '';
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 180px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 180'%3E%3Cpath d='M200 30 Q170 50 180 90 Q150 70 140 100 Q160 130 130 150' fill='none' stroke='%235A7D69' stroke-width='1.5' opacity='0.2'/%3E%3Cpath d='M180 0 Q160 30 170 60 Q145 45 135 75' fill='none' stroke='%236B8F7A' stroke-width='1' opacity='0.15'/%3E%3Cellipse cx='175' cy='85' rx='12' ry='20' fill='%235A7D69' opacity='0.08' transform='rotate(25 175 85)'/%3E%3Cellipse cx='145' cy='95' rx='10' ry='16' fill='%235A7D69' opacity='0.06' transform='rotate(35 145 95)'/%3E%3C/svg%3E");
+    top: -10px;
+    right: -10px;
+    width: 250px;
+    height: 220px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 220'%3E%3Cdefs%3E%3ClinearGradient id='leafGrad2' x1='100%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%235A7D69;stop-opacity:0.15'/%3E%3Cstop offset='100%25' style='stop-color:%236B8F7A;stop-opacity:0.05'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M250 50 Q210 70 225 120 Q190 90 175 130 Q195 165 160 190' fill='none' stroke='%235A7D69' stroke-width='1.5' opacity='0.15' stroke-linecap='round'/%3E%3Cpath d='M230 10 Q200 40 215 80 Q185 55 170 90' fill='none' stroke='%236B8F7A' stroke-width='1' opacity='0.1' stroke-linecap='round'/%3E%3Cellipse cx='220' cy='115' rx='14' ry='24' fill='url(%23leafGrad2)' transform='rotate(30 220 115)'/%3E%3Cellipse cx='180' cy='125' rx='11' ry='20' fill='url(%23leafGrad2)' transform='rotate(40 180 125)'/%3E%3Cellipse cx='165' cy='85' rx='9' ry='16' fill='%235A7D69' opacity='0.05' transform='rotate(25 165 85)'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: contain;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.9;
+    opacity: 1;
 }
 
-/* Glass-morphism card - more transparent */
+/* Cross silhouette - subtle faith element */
+.member-bg .cross-silhouette {
+    position: fixed;
+    right: 10%;
+    top: 28%;
+    width: 70px;
+    height: 110px;
+    background: linear-gradient(180deg, rgba(90, 125, 105, 0.1) 0%, rgba(90, 125, 105, 0.04) 100%);
+    clip-path: polygon(40% 0%, 60% 0%, 60% 35%, 100% 35%, 100% 50%, 60% 50%, 60% 100%, 40% 100%, 40% 50%, 0% 50%, 0% 35%, 40% 35%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* =============================================
+   FLOATING CARDS - Frosted Glass Effect
+   ============================================= */
+
 .member-card {
-    @apply backdrop-blur-md border rounded-2xl p-6;
-    background: rgba(255, 255, 255, 0.65);
-    border-color: rgba(255, 255, 255, 0.5);
+    @apply rounded-3xl p-6;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.75) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(252, 251, 249, 0.7) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 
-        0 8px 32px -4px rgba(90, 125, 105, 0.1),
-        0 2px 8px rgba(0, 0, 0, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        /* Soft floating shadow */
+        0 10px 40px -10px rgba(90, 100, 90, 0.12),
+        0 4px 16px -4px rgba(90, 100, 90, 0.08),
+        /* Inner glow - top edge */
+        inset 0 1px 1px rgba(255, 255, 255, 0.8),
+        /* Subtle depth */
+        0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: 
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.3s ease;
 }
 
 .member-card:hover {
-    background: rgba(255, 255, 255, 0.72);
+    transform: translateY(-2px);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.82) 0%,
+        rgba(255, 255, 255, 0.68) 50%,
+        rgba(252, 251, 249, 0.78) 100%
+    );
     box-shadow: 
-        0 12px 40px -6px rgba(90, 125, 105, 0.15),
-        0 4px 12px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        0 16px 50px -12px rgba(90, 100, 90, 0.16),
+        0 8px 24px -6px rgba(90, 100, 90, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9),
+        0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+/* Lighter card variant for nested elements */
+.member-card-light {
+    @apply rounded-2xl p-4;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        0 4px 16px -4px rgba(90, 100, 90, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
