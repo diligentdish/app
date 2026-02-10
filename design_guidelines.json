@@ -1,0 +1,148 @@
+{
+  "brand_identity": {
+    "name": "Blessed Belly",
+    "mission": "Faith-informed metabolic habit app for busy Christian women.",
+    "tone": "Calm, Empowering, Faith-Informed, Minimalist, Non-Judgmental",
+    "theme_mode": "light",
+    "archetype": "Organic & Earthy"
+  },
+  "typography": {
+    "font_family_heading": "Playfair Display, serif",
+    "font_family_body": "Manrope, sans-serif",
+    "scale": {
+      "h1": "text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight",
+      "h2": "text-3xl md:text-4xl font-medium tracking-tight",
+      "h3": "text-2xl md:text-3xl font-medium",
+      "body_lg": "text-lg md:text-xl leading-relaxed",
+      "body": "text-base leading-relaxed text-muted-foreground",
+      "caption": "text-sm text-muted-foreground tracking-wide uppercase"
+    },
+    "imports": [
+      "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');"
+    ]
+  },
+  "colors": {
+    "palette": {
+      "primary": "#5A7D69",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#D4A373",
+      "secondary_foreground": "#FFFFFF",
+      "accent": "#E6DCD1",
+      "accent_foreground": "#2C332E",
+      "background": "#FAF9F6",
+      "foreground": "#2C332E",
+      "muted": "#F0EBE5",
+      "muted_foreground": "#6B706B",
+      "border": "#E6E1DB",
+      "card": "#FFFFFF",
+      "card_foreground": "#2C332E",
+      "destructive": "#C86B6B"
+    },
+    "usage": {
+      "primary": "Main actions (Save, Submit), Active states, Key highlights",
+      "secondary": "Warm accents, 'Trigger' buttons (gentle urgency)",
+      "background": "Main page background - avoid pure white #FFFFFF, use #FAF9F6",
+      "surface": "Cards and containers - use white or very pale beige"
+    }
+  },
+  "visual_enhancers": {
+    "radius": "rounded-2xl",
+    "shadows": {
+      "soft": "0 4px 20px -2px rgba(90, 125, 105, 0.08)",
+      "card": "0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)",
+      "hover": "0 10px 30px -5px rgba(90, 125, 105, 0.15)"
+    },
+    "gradients": {
+      "hero_overlay": "linear-gradient(180deg, rgba(250, 249, 246, 0) 0%, #FAF9F6 100%)",
+      "subtle_glow": "radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.15), transparent 70%)"
+    },
+    "borders": "1px solid #E6E1DB"
+  },
+  "layout": {
+    "spacing_scale": "relaxed",
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "grid_strategy": "Use 'Bento' grid for dashboard: uneven, organic shapes. Avoid rigid excel-like grids.",
+    "section_spacing": "py-16 md:py-24"
+  },
+  "components": {
+    "buttons": {
+      "style": "rounded-full px-8 py-6 font-medium transition-all duration-300 ease-out",
+      "primary": "bg-primary text-primary-foreground hover:bg-[#4A6855] hover:shadow-lg hover:-translate-y-0.5",
+      "secondary": "bg-secondary/10 text-secondary-foreground hover:bg-secondary/20",
+      "ghost": "hover:bg-muted text-foreground"
+    },
+    "cards": {
+      "style": "bg-card border border-border rounded-2xl shadow-sm p-6 md:p-8 hover:border-primary/20 transition-colors"
+    },
+    "inputs": {
+      "style": "rounded-xl border-border bg-white/50 focus:ring-2 focus:ring-primary/20 focus:border-primary px-4 py-3"
+    },
+    "navigation": {
+        "style": "backdrop-blur-md bg-background/80 border-b border-border/50 sticky top-0 z-50"
+    }
+  },
+  "motion": {
+    "default_transition": "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+    "fade_in": {
+      "initial": { "opacity": 0, "y": 20 },
+      "animate": { "opacity": 1, "y": 0 },
+      "transition": { "duration": 0.6 }
+    },
+    "stagger_children": 0.1
+  },
+  "image_urls": {
+    "hero": {
+      "url": "https://images.unsplash.com/photo-1718361830657-1a2e0fbf9550?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Woman peaceful morning journal coffee",
+      "usage": "Hero section background or main visual"
+    },
+    "nutrition": {
+      "url": "https://images.unsplash.com/photo-1762199780803-8eed898ffb20?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Bowl of dark cherries aesthetic",
+      "usage": "Nutrition/BASE section"
+    },
+    "movement": {
+      "url": "https://images.unsplash.com/photo-1766412107699-170f1e3f3572?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Woman running/walking in green dress",
+      "usage": "Movement/Strength section"
+    },
+    "peace": {
+       "url": "https://images.unsplash.com/photo-1611570172695-ae1a64ee13bf?crop=entropy&cs=srgb&fm=jpg&q=85",
+       "alt": "Woman walking in foggy nature",
+       "usage": "Stress/Support section"
+    }
+  },
+  "assets": {
+      "icons": "Use 'lucide-react' with 'stroke-width={1.5}' for a lighter, elegant look."
+  },
+  "instructions_to_main_agent": {
+    "general": "Do not build a generic SaaS. This is a sanctuary for users. Every interaction should feel like a deep breath.",
+    "dashboard": "The Dashboard is NOT a data dump. It is a 'Daily Rhythm' center. Prioritize the 'Check-in' question. Make it the hero.",
+    "trigger_library": "Use a grid of soothing cards. Do not use 'Alarm' red colors. Use soft Terracotta or Sage for urgency.",
+    "onboarding": "Keep sign-up flows very simple. Use 'stepper' logic with encouraging copy (e.g., 'One step closer to peace').",
+    "accessibility": "Ensure text contrast is sufficient on the soft pastel backgrounds. Use dark charcoal (#2C332E) for text, never pure black."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: 'transition: all'. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add '.App { text-align: center; }' in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use 'sonner' for toasts. Sonner component are located in '/app/src/components/ui/sonner.tsx'",
+    "Use lucide-react for icons.",
+    "All interactive and key informational elements MUST include a 'data-testid' attribute to facilitate robust automated testing."
+  ]
+}
