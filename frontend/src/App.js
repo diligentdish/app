@@ -85,6 +85,14 @@ const AppRouter = () => {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="/profile" 
+          element={
+            <ProtectedRoute requireSubscription>
+              <ProfilePage />
+            </ProtectedRoute>
+          } 
+        />
         
         {/* Admin Routes */}
         <Route 
