@@ -39,8 +39,8 @@ const LoginPage = () => {
       <div className="hidden lg:flex relative auth-image-panel items-center justify-center p-12">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200"
-            alt="Peaceful morning meditation"
+            src="https://images.unsplash.com/photo-1558086478-d632ccc5a833?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200"
+            alt="Woman enjoying peaceful morning with coffee"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 auth-image-overlay" />
