@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { LogoWithText } from './Logo';
 import { Button } from '../components/ui/button';
 import { 
   DropdownMenu, 
@@ -29,17 +30,8 @@ export const Navbar = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center gap-2"
-            data-testid="navbar-logo"
-          >
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">BB</span>
-            </div>
-            <span className="text-xl font-medium" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Blessed Belly
-            </span>
+          <Link to="/" data-testid="navbar-logo">
+            <LogoWithText size="default" variant="dark" />
           </Link>
 
           {/* Desktop Navigation */}
