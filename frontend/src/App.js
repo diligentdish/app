@@ -17,6 +17,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import DashboardPage from "./pages/DashboardPage";
 import TriggerLibraryPage from "./pages/TriggerLibraryPage";
+import ProfilePage from "./pages/ProfilePage";
 import AdminPage from "./pages/AdminPage";
 
 // Layout wrapper that shows/hides navbar and footer
