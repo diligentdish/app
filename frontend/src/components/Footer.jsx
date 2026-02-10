@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LogoWithText } from './Logo';
 import { Heart } from 'lucide-react';
 
 export const Footer = () => {
@@ -9,13 +10,8 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-white font-semibold text-sm">BB</span>
-              </div>
-              <span className="text-xl font-medium" style={{ fontFamily: 'Playfair Display, serif' }}>
-                Blessed Belly
-              </span>
+            <Link to="/" className="inline-block mb-4">
+              <LogoWithText size="default" variant="dark" />
             </Link>
             <p className="body max-w-sm">
               Faith-informed metabolic habits for busy Christian women. 
