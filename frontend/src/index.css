@@ -237,13 +237,17 @@ button, a, input, textarea {
     }
 }
 
-/* Member Area Styles - Watercolor Background */
+/* Member Area Styles - Watercolor Background with Botanicals */
 .member-bg {
-    background: linear-gradient(135deg, #e8efe5 0%, #f5f3ef 50%, #e5ebe7 100%);
+    background: 
+        linear-gradient(135deg, rgba(232, 239, 229, 0.7) 0%, rgba(245, 243, 239, 0.6) 50%, rgba(229, 235, 231, 0.7) 100%),
+        url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80&fit=crop') center/cover fixed;
     background-attachment: fixed;
     position: relative;
+    min-height: 100vh;
 }
 
+/* Soft watercolor overlay */
 .member-bg::before {
     content: '';
     position: fixed;
@@ -251,23 +255,24 @@ button, a, input, textarea {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-        radial-gradient(ellipse at 20% 80%, rgba(90, 125, 105, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(212, 163, 115, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 60% 60%, rgba(139, 169, 153, 0.05) 0%, transparent 40%);
+    background: 
+        radial-gradient(ellipse at 85% 35%, rgba(90, 125, 105, 0.12) 0%, transparent 45%),
+        radial-gradient(ellipse at 15% 75%, rgba(139, 169, 143, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(250, 249, 246, 0.85) 0%, rgba(245, 243, 239, 0.75) 50%, rgba(240, 238, 232, 0.85) 100%);
     pointer-events: none;
     z-index: 0;
 }
 
-/* Cross silhouette in background */
+/* Cross silhouette in background - more visible */
 .member-bg::after {
     content: '';
     position: fixed;
-    right: 5%;
-    top: 30%;
-    width: 80px;
-    height: 120px;
-    background: linear-gradient(180deg, rgba(90, 125, 105, 0.06) 0%, rgba(90, 125, 105, 0.02) 100%);
+    right: 8%;
+    top: 25%;
+    width: 100px;
+    height: 150px;
+    background: linear-gradient(180deg, rgba(90, 125, 105, 0.15) 0%, rgba(90, 125, 105, 0.08) 100%);
     clip-path: polygon(40% 0%, 60% 0%, 60% 35%, 100% 35%, 100% 50%, 60% 50%, 60% 100%, 40% 100%, 40% 50%, 0% 50%, 0% 35%, 40% 35%);
     pointer-events: none;
     z-index: 0;
@@ -284,11 +289,53 @@ button, a, input, textarea {
     z-index: 1;
 }
 
+/* Botanical leaf decoration - bottom left corner */
+.member-content-area::before {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 200px;
+    width: 300px;
+    height: 250px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 250'%3E%3Cpath d='M50 250 Q70 200 60 150 Q80 180 100 140 Q90 100 120 80' fill='none' stroke='%235A7D69' stroke-width='2' opacity='0.3'/%3E%3Cpath d='M80 250 Q100 210 95 170 Q115 190 130 160 Q125 130 150 110' fill='none' stroke='%235A7D69' stroke-width='1.5' opacity='0.25'/%3E%3Cpath d='M30 250 Q45 220 40 180 Q55 200 65 170' fill='none' stroke='%236B8F7A' stroke-width='1.5' opacity='0.2'/%3E%3Cellipse cx='60' cy='145' rx='15' ry='25' fill='%235A7D69' opacity='0.1' transform='rotate(-20 60 145)'/%3E%3Cellipse cx='100' cy='135' rx='12' ry='20' fill='%235A7D69' opacity='0.08' transform='rotate(-30 100 135)'/%3E%3Cellipse cx='45' cy='175' rx='10' ry='18' fill='%236B8F7A' opacity='0.1' transform='rotate(-15 45 175)'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.8;
+}
+
+/* Top right botanical accent */
+.member-content-area::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 180px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 180'%3E%3Cpath d='M200 30 Q170 50 180 90 Q150 70 140 100 Q160 130 130 150' fill='none' stroke='%235A7D69' stroke-width='1.5' opacity='0.2'/%3E%3Cpath d='M180 0 Q160 30 170 60 Q145 45 135 75' fill='none' stroke='%236B8F7A' stroke-width='1' opacity='0.15'/%3E%3Cellipse cx='175' cy='85' rx='12' ry='20' fill='%235A7D69' opacity='0.08' transform='rotate(25 175 85)'/%3E%3Cellipse cx='145' cy='95' rx='10' ry='16' fill='%235A7D69' opacity='0.06' transform='rotate(35 145 95)'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.9;
+}
+
+/* Glass-morphism card - more transparent */
 .member-card {
-    @apply bg-white/90 backdrop-blur-sm border border-white/50 rounded-2xl p-6;
-    box-shadow: 0 4px 20px -2px rgba(90, 125, 105, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+    @apply backdrop-blur-md border rounded-2xl p-6;
+    background: rgba(255, 255, 255, 0.65);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 
+        0 8px 32px -4px rgba(90, 125, 105, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .member-card:hover {
-    box-shadow: 0 8px 30px -5px rgba(90, 125, 105, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 
+        0 12px 40px -6px rgba(90, 125, 105, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
