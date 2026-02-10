@@ -535,22 +535,35 @@ async def stripe_webhook(request: Request):
     
     host_url = str(request.base_url).rstrip('/')
     webhook_url = f"{host_url}/api/webhook/stripe"
-    stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
+    stripe_checkout = StripeCheckout(
+        api_key=STRIPE_API_KEY, 
+        webhook_url=webhook_url,
+        webhook_secret=STRIPE_WEBHOOK_SECRET
+    )
     
     try:
         webhook_response = await stripe_checkout.handle_webhook(body, signature)
         
         if webhook_response.payment_status == "paid":
             user_id = webhook_response.metadata.get("user_id")
+            user_email = webhook_response.metadata.get("user_email")
+            logger.info(f"Payment successful for user: {user_id} ({user_email})")
+            
             if user_id:
                 await db.subscriptions.update_one(
                     {"user_id": user_id},
                     {"$set": {
+                        "subscription_id": f"sub_{uuid.uuid4().hex[:12]}",
+                        "user_id": user_id,
+                        "plan": "beta_monthly",
                         "status": "active",
+                        "amount": BETA_PRICE,
+                        "started_at": datetime.now(timezone.utc).isoformat(),
                         "updated_at": datetime.now(timezone.utc).isoformat()
                     }},
                     upsert=True
                 )
+                logger.info(f"Subscription activated for user: {user_id}")
         
         return {"received": True}
     except Exception as e:
