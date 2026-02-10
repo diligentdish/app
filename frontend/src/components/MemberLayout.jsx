@@ -95,9 +95,7 @@ export const MemberLayout = ({ children }) => {
       <div className="md:hidden fixed top-0 left-0 right-0 z-50 member-sidebar py-4 px-4">
         <div className="flex items-center justify-between">
           <Link to="/dashboard" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center">
-              <span className="text-primary font-bold">✝</span>
-            </div>
+            <Logo size="small" variant="transparent" />
             <span className="text-lg font-medium text-white" style={{ fontFamily: 'Playfair Display, serif' }}>
               Blessed Belly
             </span>
