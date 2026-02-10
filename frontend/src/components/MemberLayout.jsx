@@ -40,9 +40,7 @@ export const MemberLayout = ({ children }) => {
         {/* Logo */}
         <div className="p-6">
           <Link to="/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-sm">
-              <span className="text-primary font-bold text-lg">✝</span>
-            </div>
+            <Logo size="default" variant="transparent" />
             <span className="text-xl font-medium text-white" style={{ fontFamily: 'Playfair Display, serif' }}>
               Blessed Belly
             </span>
