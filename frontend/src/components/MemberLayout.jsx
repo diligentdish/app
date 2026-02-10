@@ -21,6 +21,19 @@ export const MemberLayout = ({ children }) => {
 
   return (
     <div className="min-h-screen flex member-bg">
+      {/* Cross silhouette - faith element */}
+      <div className="cross-silhouette" style={{
+        position: 'fixed',
+        right: '10%',
+        top: '28%',
+        width: '70px',
+        height: '110px',
+        background: 'linear-gradient(180deg, rgba(90, 125, 105, 0.1) 0%, rgba(90, 125, 105, 0.04) 100%)',
+        clipPath: 'polygon(40% 0%, 60% 0%, 60% 35%, 100% 35%, 100% 50%, 60% 50%, 60% 100%, 40% 100%, 40% 50%, 0% 50%, 0% 35%, 40% 35%)',
+        pointerEvents: 'none',
+        zIndex: 0
+      }} />
+      
       {/* Sidebar */}
       <aside className="hidden md:flex w-64 flex-col member-sidebar" data-testid="member-sidebar">
         {/* Logo */}
