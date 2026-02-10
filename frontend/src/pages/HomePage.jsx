@@ -38,8 +38,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen" data-testid="home-page">
       {/* Hero Section */}
-      <section className="relative overflow-hidden section-spacing">
-        <div className="absolute inset-0 subtle-glow opacity-50" />
+      <section className="relative overflow-hidden section-spacing public-hero">
         <div className="container-custom relative">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="fade-in-up">
@@ -69,17 +68,16 @@ const HomePage = () => {
             </div>
             
             <div className="relative fade-in stagger-2">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1718361830657-1a2e0fbf9550?crop=entropy&cs=srgb&fm=jpg&q=85&w=800"
-                  alt="Woman peaceful morning journal coffee"
+                  src="https://images.unsplash.com/photo-1713865466512-67bb4211b24a?crop=entropy&cs=srgb&fm=jpg&q=85&w=800"
+                  alt="Woman smiling while using the Blessed Belly app on her phone"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 gradient-overlay" />
               </div>
               
               {/* Floating Card */}
-              <div className="absolute -bottom-6 -left-6 card-custom max-w-xs shadow-lg">
+              <div className="absolute -bottom-6 -left-6 public-card max-w-xs">
                 <p className="text-sm italic text-muted-foreground">
                   "Come to me, all you who are weary and burdened, and I will give you rest."
                 </p>
@@ -91,7 +89,7 @@ const HomePage = () => {
       </section>
 
       {/* Problem Section */}
-      <section className="section-spacing bg-muted/30">
+      <section className="section-spacing public-section-alt">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="heading-2 mb-6">
@@ -120,7 +118,7 @@ const HomePage = () => {
                 description: "Grace-based progress over perfection. 80/20 approach that honors your humanity."
               }
             ].map((item, idx) => (
-              <div key={idx} className={`card-custom fade-in-up stagger-${idx + 1}`}>
+              <div key={idx} className={`public-card fade-in-up stagger-${idx + 1}`}>
                 <h3 className="heading-3 text-xl mb-3">{item.title}</h3>
                 <p className="body">{item.description}</p>
               </div>
@@ -145,7 +143,7 @@ const HomePage = () => {
             {baseFramework.map((item, idx) => (
               <div 
                 key={item.letter} 
-                className={`card-custom text-center fade-in-up stagger-${idx + 1}`}
+                className={`public-card text-center fade-in-up stagger-${idx + 1}`}
                 data-testid={`base-card-${item.letter.toLowerCase()}`}
               >
                 <div className={`base-badge ${item.colorClass} mx-auto mb-4`}>
@@ -160,14 +158,14 @@ const HomePage = () => {
       </section>
 
       {/* How It Works */}
-      <section className="section-spacing bg-muted/30">
+      <section className="section-spacing public-section-alt">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1762199780803-8eed898ffb20?crop=entropy&cs=srgb&fm=jpg&q=85&w=800"
-                  alt="Healthy nutrition"
+                  src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?crop=entropy&cs=srgb&fm=jpg&q=85&w=800"
+                  alt="Healthy balanced meal"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -214,7 +212,7 @@ const HomePage = () => {
       {/* CTA Section */}
       <section className="section-spacing">
         <div className="container-custom">
-          <div className="card-custom bg-primary/5 border-primary/20 text-center py-12 md:py-16">
+          <div className="public-card-accent text-center py-12 md:py-16">
             <h2 className="heading-2 mb-4">Ready to Simplify?</h2>
             <p className="body-lg text-muted-foreground mb-8 max-w-xl mx-auto">
               Join Blessed Belly for just $9/month and start experiencing 
