@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { LogoWithText } from '../components/Logo';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -39,18 +40,18 @@ const SignupPage = () => {
   return (
     <div className="min-h-screen grid lg:grid-cols-2" data-testid="signup-page">
       {/* Left Side - Image & Quote */}
-      <div className="hidden lg:flex relative bg-muted/30 items-center justify-center p-12">
+      <div className="hidden lg:flex relative auth-image-panel items-center justify-center p-12">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1766412107699-170f1e3f3572?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200"
-            alt="Woman in peaceful movement"
-            className="w-full h-full object-cover opacity-40"
+            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200"
+            alt="Woman in peaceful yoga pose"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/10" />
+          <div className="absolute inset-0 auth-image-overlay" />
         </div>
         
         <div className="relative z-10 max-w-md">
-          <div className="card-custom bg-white/90 backdrop-blur-sm">
+          <div className="public-card">
             <p className="text-lg italic text-foreground leading-relaxed mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
               "I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well."
             </p>
@@ -60,16 +61,11 @@ const SignupPage = () => {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex items-center justify-center p-8 lg:p-12">
+      <div className="flex items-center justify-center p-8 lg:p-12 auth-form-panel">
         <div className="w-full max-w-md">
           {/* Logo */}
-          <Link to="/" className="inline-flex items-center gap-3 mb-12">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-white font-semibold text-lg">BB</span>
-            </div>
-            <span className="text-2xl font-medium" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Blessed Belly
-            </span>
+          <Link to="/" className="inline-block mb-12">
+            <LogoWithText size="large" variant="dark" />
           </Link>
 
           {/* Welcome Text */}
@@ -90,7 +86,7 @@ const SignupPage = () => {
                 placeholder="Your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input-custom py-6 text-base"
+                className="auth-input"
                 required
                 data-testid="name-input"
               />
@@ -104,7 +100,7 @@ const SignupPage = () => {
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input-custom py-6 text-base"
+                className="auth-input"
                 required
                 data-testid="email-input"
               />
@@ -118,7 +114,7 @@ const SignupPage = () => {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input-custom py-6 text-base"
+                className="auth-input"
                 required
                 minLength={6}
                 data-testid="password-input"
