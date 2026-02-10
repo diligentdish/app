@@ -230,6 +230,101 @@ button, a, input, textarea {
     color: hsl(var(--foreground));
 }
 
+/* =============================================
+   PUBLIC PAGES - Refined Natural Styling
+   ============================================= */
+
+/* Hero section with soft gradient */
+.public-hero {
+    background: 
+        radial-gradient(ellipse 80% 50% at 80% 20%, rgba(139, 169, 143, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 60% at 20% 80%, rgba(212, 189, 165, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #FAF9F6 0%, #F5F3EF 100%);
+}
+
+/* Alternate section background */
+.public-section-alt {
+    background: 
+        radial-gradient(ellipse 70% 50% at 30% 50%, rgba(139, 169, 143, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #F0EEE8 0%, #F5F3EF 50%, #FAF9F6 100%);
+}
+
+/* Public page cards - soft, floating */
+.public-card {
+    @apply rounded-2xl p-6;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.8) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        0 8px 32px -8px rgba(90, 100, 90, 0.1),
+        0 4px 12px -4px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: 
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.public-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 40px -10px rgba(90, 100, 90, 0.15),
+        0 6px 16px -6px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Accent card for CTAs */
+.public-card-accent {
+    @apply rounded-3xl p-8;
+    background: 
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(139, 169, 143, 0.1) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(250, 248, 245, 0.9) 100%);
+    border: 1px solid rgba(90, 125, 105, 0.15);
+    box-shadow: 
+        0 10px 40px -10px rgba(90, 125, 105, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* =============================================
+   AUTH PAGES - Login & Signup
+   ============================================= */
+
+.auth-image-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-image-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(90, 125, 105, 0.3) 0%,
+        rgba(139, 169, 143, 0.2) 50%,
+        rgba(212, 189, 165, 0.2) 100%
+    );
+}
+
+.auth-form-panel {
+    background: 
+        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(139, 169, 143, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 60% at 20% 80%, rgba(212, 189, 165, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #FAF9F6 0%, #F5F3EF 100%);
+}
+
+.auth-input {
+    @apply rounded-xl border-border bg-white/70 px-4 py-6 text-base;
+    backdrop-filter: blur(4px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.auth-input:focus {
+    @apply border-primary bg-white;
+    box-shadow: 0 0 0 3px rgba(90, 125, 105, 0.1);
+}
+
 /* Debug wrapper fix */
 @layer base {
     [data-debug-wrapper="true"] {
