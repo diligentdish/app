@@ -869,31 +869,143 @@ async def seed_data(request: Request):
     if actions_count > 0:
         return {"message": "Data already seeded"}
     
-    # BASEline Actions
+    # BASEline Actions with educational content
     baseline_actions = [
         # B - Become Balanced
-        {"action_id": "action_b1", "base_category": "B", "action_text": "Start your next meal with protein first, then vegetables, then carbs.", "movement_text": "Take a gentle 10-minute walk after eating."},
-        {"action_id": "action_b2", "base_category": "B", "action_text": "Add a healthy fat (avocado, olive oil, nuts) to your next meal.", "movement_text": "Do 5 slow squats before your meal."},
-        {"action_id": "action_b3", "base_category": "B", "action_text": "Drink a full glass of water 15 minutes before eating.", "movement_text": "Stretch your arms overhead 10 times."},
-        {"action_id": "action_b4", "base_category": "B", "action_text": "Include fiber-rich vegetables in your lunch today.", "movement_text": "Walk around the block after lunch."},
+        {
+            "action_id": "action_b1",
+            "base_category": "B",
+            "action_text": "Start your next meal with protein first, then vegetables, then carbs.",
+            "why_it_helps": "Eating in this order slows down how quickly sugar enters your bloodstream. When you eat carbs first, your blood sugar spikes and crashes—leaving you tired and hungry. Protein and vegetables create a 'buffer' that keeps your energy steady.",
+            "examples": "Protein options: grilled chicken, salmon, eggs, Greek yogurt, cottage cheese, lentils, or black beans. Eat a few bites of these before touching your rice, bread, or pasta.",
+            "movement_text": "Take a gentle 10-minute walk after eating."
+        },
+        {
+            "action_id": "action_b2",
+            "base_category": "B",
+            "action_text": "Add a healthy fat to your next meal.",
+            "why_it_helps": "Healthy fats help you feel satisfied longer and support hormone balance. They also help your body absorb important vitamins (A, D, E, K) from your vegetables. Fat doesn't make you fat—it helps regulate hunger.",
+            "examples": "Easy additions: half an avocado, a drizzle of olive oil on salad, a handful of almonds or walnuts, a spoonful of nut butter, or cooking with coconut oil.",
+            "movement_text": "Do 5 slow squats before your meal."
+        },
+        {
+            "action_id": "action_b3",
+            "base_category": "B",
+            "action_text": "Drink a full glass of water 15 minutes before eating.",
+            "why_it_helps": "Often what feels like hunger is actually thirst. Drinking water before meals helps you eat the right amount and supports digestion. It also gives your brain time to recognize fullness signals.",
+            "examples": "One full glass is about 8 ounces. Room temperature or warm water is easier on digestion than ice cold. Add a squeeze of lemon if plain water feels boring.",
+            "movement_text": "Stretch your arms overhead 10 times."
+        },
+        {
+            "action_id": "action_b4",
+            "base_category": "B",
+            "action_text": "Include fiber-rich vegetables in your lunch today.",
+            "why_it_helps": "Fiber is like a broom for your digestive system—it keeps things moving and feeds the good bacteria in your gut. It also slows sugar absorption, preventing energy crashes. Most women don't get nearly enough fiber.",
+            "examples": "High-fiber veggies: broccoli, Brussels sprouts, artichokes, green peas, carrots, sweet potatoes, spinach, kale. Even adding a side salad counts! Aim for your veggies to fill half your plate.",
+            "movement_text": "Walk around the block after lunch."
+        },
         
         # A - Activate Awareness
-        {"action_id": "action_a1", "base_category": "A", "action_text": "Before eating, pause and take 3 deep breaths. Notice your hunger level.", "movement_text": "Roll your shoulders back 10 times to release tension."},
-        {"action_id": "action_a2", "base_category": "A", "action_text": "Put your fork down between bites for your next meal.", "movement_text": "Take a 5-minute walking break outside."},
-        {"action_id": "action_a3", "base_category": "A", "action_text": "Write down one thing you're grateful for about your body today.", "movement_text": "Do gentle neck stretches for 2 minutes."},
-        {"action_id": "action_a4", "base_category": "A", "action_text": "Eat one meal today without screens or distractions.", "movement_text": "Stand and stretch every hour today."},
+        {
+            "action_id": "action_a1",
+            "base_category": "A",
+            "action_text": "Before eating, pause and take 3 deep breaths. Notice your hunger level on a scale of 1-10.",
+            "why_it_helps": "When you're stressed, your body is in 'fight or flight' mode and can't digest food properly. Three deep breaths activate your 'rest and digest' system. Rating your hunger builds awareness—many of us eat when we're not actually hungry.",
+            "examples": "1-3 = not hungry (eating from boredom or stress), 4-6 = moderately hungry (good time to eat), 7-10 = very hungry (try not to get here—you'll overeat). Ideally, eat when you're at a 5-6.",
+            "movement_text": "Roll your shoulders back 10 times to release tension."
+        },
+        {
+            "action_id": "action_a2",
+            "base_category": "A",
+            "action_text": "Put your fork down between bites for your next meal.",
+            "why_it_helps": "It takes about 20 minutes for your brain to receive fullness signals. When you eat quickly, you overshoot fullness before your brain catches up. Slowing down helps you eat the right amount naturally.",
+            "examples": "Take a bite, set down your fork, chew completely, swallow, then pick up your fork again. It feels awkward at first but becomes natural. Notice how food tastes more flavorful when you slow down.",
+            "movement_text": "Take a 5-minute walking break outside."
+        },
+        {
+            "action_id": "action_a3",
+            "base_category": "A",
+            "action_text": "Write down one thing you're grateful for about your body today.",
+            "why_it_helps": "Gratitude rewires your brain away from criticism and toward appreciation. When you appreciate your body, you naturally want to care for it better. This shifts eating from punishment to nourishment.",
+            "examples": "Examples: 'I'm grateful my legs carried me today,' 'I'm thankful for arms that hug my children,' 'I appreciate that my body healed from that cold,' 'I'm grateful for eyes that see the sunrise.'",
+            "movement_text": "Do gentle neck stretches for 2 minutes."
+        },
+        {
+            "action_id": "action_a4",
+            "base_category": "A",
+            "action_text": "Eat one meal today without screens or distractions.",
+            "why_it_helps": "Distracted eating leads to overeating because you're not paying attention to fullness cues. Studies show people eat significantly more when watching TV or scrolling their phones. Single-tasking helps you enjoy food more with less.",
+            "examples": "Turn off the TV, put your phone in another room, step away from your desk. Sit at a table, look at your food, notice the colors and smells. Even 10 minutes of focused eating makes a difference.",
+            "movement_text": "Stand and stretch every hour today."
+        },
         
         # S - Support Strength
-        {"action_id": "action_s1", "base_category": "S", "action_text": "Stand up and move for 5 minutes every hour today.", "movement_text": "Do 10 wall push-ups."},
-        {"action_id": "action_s2", "base_category": "S", "action_text": "Take the stairs instead of the elevator today.", "movement_text": "Hold a 30-second plank."},
-        {"action_id": "action_s3", "base_category": "S", "action_text": "Park farther away from your destination.", "movement_text": "Do 15 standing calf raises."},
-        {"action_id": "action_s4", "base_category": "S", "action_text": "Do gentle stretches while waiting for your morning coffee.", "movement_text": "Walk for 15 minutes after dinner."},
+        {
+            "action_id": "action_s1",
+            "base_category": "S",
+            "action_text": "Stand up and move for 5 minutes every hour today.",
+            "why_it_helps": "Sitting for long periods slows your metabolism and makes your body store more fat around your middle. Brief movement breaks keep your blood flowing and your metabolism active. It also improves focus and energy.",
+            "examples": "Set a phone timer. Walk to get water, do a lap around your house or office, march in place, do some arm circles. Even standing and stretching counts. The goal is breaking up long sitting periods.",
+            "movement_text": "Do 10 wall push-ups."
+        },
+        {
+            "action_id": "action_s2",
+            "base_category": "S",
+            "action_text": "Take the stairs instead of the elevator today.",
+            "why_it_helps": "Stair climbing is a simple way to build leg strength and get your heart rate up without 'working out.' Strong muscles burn more calories even at rest. Small choices add up to big changes over time.",
+            "examples": "Start with one flight and take the elevator the rest of the way if needed. Hold the railing if balance is a concern. Climb at your own pace—there's no rush. Count it as a win even if it's just a few stairs.",
+            "movement_text": "Hold a 30-second plank."
+        },
+        {
+            "action_id": "action_s3",
+            "base_category": "S",
+            "action_text": "Park farther away from your destination today.",
+            "why_it_helps": "Extra steps throughout the day add up significantly. This 'hidden exercise' boosts your daily movement without requiring gym time. Walking also reduces stress hormones that contribute to belly fat.",
+            "examples": "Park at the back of the parking lot, get off the bus one stop early, walk to a colleague's desk instead of emailing. Aim for an extra 5-10 minutes of walking spread throughout the day.",
+            "movement_text": "Do 15 standing calf raises."
+        },
+        {
+            "action_id": "action_s4",
+            "base_category": "S",
+            "action_text": "Do gentle stretches while waiting for your morning coffee.",
+            "why_it_helps": "Morning stretching wakes up your muscles, improves circulation, and sets a positive tone for the day. Stiff muscles can lead to poor posture, which affects digestion and how your body stores fat around your midsection.",
+            "examples": "While the coffee brews: reach arms overhead, twist gently side to side, roll your neck, touch your toes (or reach toward them), do a few hip circles. 2-3 minutes is all you need.",
+            "movement_text": "Walk for 15 minutes after dinner."
+        },
         
         # E - Engage Your Gut
-        {"action_id": "action_e1", "base_category": "E", "action_text": "Add a probiotic food (yogurt, sauerkraut) to one meal today.", "movement_text": "Do gentle torso twists after eating."},
-        {"action_id": "action_e2", "base_category": "E", "action_text": "Chew each bite 20 times during your next meal.", "movement_text": "Take a slow 15-minute walk to aid digestion."},
-        {"action_id": "action_e3", "base_category": "E", "action_text": "Drink warm water with lemon first thing in the morning.", "movement_text": "Do gentle belly breathing for 5 minutes."},
-        {"action_id": "action_e4", "base_category": "E", "action_text": "Stop eating when you feel 80% full.", "movement_text": "Light stretching before bed."},
+        {
+            "action_id": "action_e1",
+            "base_category": "E",
+            "action_text": "Add a probiotic food to one meal today.",
+            "why_it_helps": "Your gut contains trillions of bacteria that affect weight, mood, and immune function. Probiotic foods add beneficial bacteria to your gut, improving digestion and reducing bloating. A healthy gut microbiome is linked to less belly fat.",
+            "examples": "Probiotic-rich foods: plain Greek yogurt (check for 'live cultures'), kefir, sauerkraut, kimchi, miso soup, tempeh, kombucha. Start small—even a few spoonfuls of sauerkraut on the side counts.",
+            "movement_text": "Do gentle torso twists after eating."
+        },
+        {
+            "action_id": "action_e2",
+            "base_category": "E",
+            "action_text": "Chew each bite 20-30 times during your next meal.",
+            "why_it_helps": "Digestion starts in your mouth. Chewing thoroughly breaks down food so your stomach works less hard. It also releases more nutrients and gives your brain time to register fullness. Most of us chew only 5-10 times!",
+            "examples": "Count your chews for a few bites to see where you're starting. Put your fork down while chewing. Notice how food becomes almost liquid before you swallow. Soup and smoothies don't count for this practice!",
+            "movement_text": "Take a slow 15-minute walk to aid digestion."
+        },
+        {
+            "action_id": "action_e3",
+            "base_category": "E",
+            "action_text": "Drink warm water with lemon first thing in the morning.",
+            "why_it_helps": "After sleeping, your body is dehydrated and your digestive system is sluggish. Warm lemon water hydrates you, stimulates digestion, and supports your liver's natural detox processes. It's a gentle wake-up call for your gut.",
+            "examples": "Heat water to warm (not boiling), squeeze half a lemon, drink before breakfast. Use a straw if you're concerned about enamel. Fresh lemon is better than bottled juice. Do this before coffee for best results.",
+            "movement_text": "Do gentle belly breathing for 5 minutes."
+        },
+        {
+            "action_id": "action_e4",
+            "base_category": "E",
+            "action_text": "Stop eating when you feel 80% full.",
+            "why_it_helps": "The Japanese call this 'hara hachi bu.' Your stomach is about the size of your fist and can stretch—but shouldn't have to. Stopping at 80% prevents the stuffed feeling and gives your digestive system room to work efficiently.",
+            "examples": "80% full feels like: satisfied but not stuffed, you could eat more but don't need to, no belly discomfort, you still have energy. 100% full feels like: needing to unbutton pants, feeling sleepy, slight nausea.",
+            "movement_text": "Light stretching before bed."
+        },
     ]
     
     # Trigger Cards
