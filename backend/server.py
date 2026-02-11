@@ -655,6 +655,8 @@ async def daily_checkin(checkin: CheckInRequest, request: Request):
         base_category=base_category,
         action={
             "text": action.get("action_text", ""),
+            "why_it_helps": action.get("why_it_helps", ""),
+            "examples": action.get("examples", ""),
             "base_name": get_base_name(base_category),
             "base_letter": base_category
         },
