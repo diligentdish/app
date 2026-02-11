@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { MemberLayout } from '../components/MemberLayout';
-import { Loader2, ChevronRight, Footprints, BookOpen, Heart, Cookie, Battery, Utensils } from 'lucide-react';
+import { Loader2, ChevronRight, ChevronDown, ChevronUp, Footprints, BookOpen, Heart, Cookie, Battery, Utensils, Lightbulb, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
@@ -14,6 +14,8 @@ const DashboardPage = () => {
   const [submitting, setSubmitting] = useState(false);
   const [todayData, setTodayData] = useState(null);
   const [selectedSignal, setSelectedSignal] = useState(null);
+  const [showWhyHelps, setShowWhyHelps] = useState(false);
+  const [showExamples, setShowExamples] = useState(false);
 
   const signals = [
     { id: 'stressed', label: 'Stressed' },
@@ -69,6 +71,8 @@ const DashboardPage = () => {
   const handleCheckIn = async (signal) => {
     setSelectedSignal(signal);
     setSubmitting(true);
+    setShowWhyHelps(false);
+    setShowExamples(false);
     
     try {
       const response = await fetch(`${API_URL}/api/checkin`, {
@@ -161,33 +165,93 @@ const DashboardPage = () => {
               <h3 className="text-xl font-semibold">{currentBase.name}</h3>
             </div>
 
-            {/* Content with Image */}
-            <div className="flex gap-6 mb-6">
-              <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-md">
-                <img 
-                  src={currentBase.image}
-                  alt={currentBase.name}
-                  className="w-full h-full object-cover"
-                />
+            {/* Main Action */}
+            <div className="p-5 rounded-2xl bg-primary/5 border border-primary/10 mb-4">
+              <div className="flex items-start gap-4">
+                <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
+                  <img 
+                    src={currentBase.image}
+                    alt={currentBase.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-primary mb-1 uppercase tracking-wide">Your One Focus</p>
+                  <p className="text-lg font-medium text-foreground">{todayData.action?.text}</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <p className="text-lg font-medium text-foreground mb-2">
-                  {todayData.action?.text}
-                </p>
-                <p className="text-muted-foreground flex items-center gap-2">
-                  <Footprints className="w-4 h-4" />
-                  {todayData.movement?.text}
-                </p>
+            </div>
+
+            {/* Why It Helps - Expandable */}
+            {todayData.action?.why_it_helps && (
+              <div className="mb-4">
+                <button
+                  onClick={() => setShowWhyHelps(!showWhyHelps)}
+                  className="flex items-center justify-between w-full p-4 rounded-xl bg-muted/50 hover:bg-muted/70 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <Lightbulb className="w-5 h-5 text-secondary" />
+                    <span className="font-medium text-foreground">Why does this help?</span>
+                  </div>
+                  {showWhyHelps ? (
+                    <ChevronUp className="w-5 h-5 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  )}
+                </button>
+                {showWhyHelps && (
+                  <div className="mt-2 p-4 rounded-xl bg-muted/30 border border-border">
+                    <p className="text-foreground leading-relaxed">{todayData.action.why_it_helps}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Examples - Expandable */}
+            {todayData.action?.examples && (
+              <div className="mb-4">
+                <button
+                  onClick={() => setShowExamples(!showExamples)}
+                  className="flex items-center justify-between w-full p-4 rounded-xl bg-muted/50 hover:bg-muted/70 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                    <span className="font-medium text-foreground">Show me examples</span>
+                  </div>
+                  {showExamples ? (
+                    <ChevronUp className="w-5 h-5 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  )}
+                </button>
+                {showExamples && (
+                  <div className="mt-2 p-4 rounded-xl bg-primary/5 border border-primary/10">
+                    <p className="text-foreground leading-relaxed">{todayData.action.examples}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Movement Suggestion */}
+            <div className="p-4 rounded-xl bg-muted/50 mb-4">
+              <div className="flex items-start gap-3">
+                <Footprints className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-primary mb-1">Movement</p>
+                  <p className="text-foreground">{todayData.movement?.text}</p>
+                </div>
               </div>
             </div>
 
             {/* Scripture */}
-            <div className="flex items-start gap-3 pt-4 border-t border-border">
-              <BookOpen className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-              <p className="text-foreground">
-                <span className="italic">{todayData.verse?.text}</span>
-                <span className="text-muted-foreground ml-2">— {todayData.verse?.reference}</span>
-              </p>
+            <div className="p-4 rounded-xl border border-border">
+              <div className="flex items-start gap-3">
+                <BookOpen className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                <div>
+                  <p className="text-foreground italic">"{todayData.verse?.text}"</p>
+                  <p className="text-sm text-muted-foreground mt-2">— {todayData.verse?.reference}</p>
+                </div>
+              </div>
             </div>
           </div>
         ) : (
@@ -200,7 +264,7 @@ const DashboardPage = () => {
 
         {/* Explore the Library */}
         <div className="mb-8">
-          <h3 className="text-lg font-medium text-foreground mb-4">Explore the Library</h3>
+          <h3 className="text-lg font-medium text-foreground mb-4">Need Support Right Now?</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {quickTriggers.map((trigger) => {
               const Icon = trigger.icon;
