@@ -714,6 +714,8 @@ async def get_today_checkin(request: Request):
         "base_category": checkin["base_category"],
         "action": {
             "text": action.get("action_text", ""),
+            "why_it_helps": action.get("why_it_helps", ""),
+            "examples": action.get("examples", ""),
             "base_name": get_base_name(checkin["base_category"]),
             "base_letter": checkin["base_category"]
         },
