@@ -179,13 +179,16 @@ export const Navbar = () => {
               >
                 Home
               </Link>
-              <Link 
-                to="/pricing" 
-                className="px-4 py-2 hover:bg-muted rounded-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pricing
-              </Link>
+              {/* Only show Pricing if user doesn't have subscription */}
+              {!hasSubscription && (
+                <Link 
+                  to="/pricing" 
+                  className="px-4 py-2 hover:bg-muted rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+              )}
               
               {isAuthenticated && hasSubscription && (
                 <>
