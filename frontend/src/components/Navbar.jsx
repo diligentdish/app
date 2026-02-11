@@ -43,13 +43,16 @@ export const Navbar = () => {
             >
               Home
             </Link>
-            <Link 
-              to="/pricing" 
-              className={`btn-ghost ${isActive('/pricing') ? 'bg-muted' : ''}`}
-              data-testid="nav-pricing"
-            >
-              Pricing
-            </Link>
+            {/* Only show Pricing if user doesn't have subscription */}
+            {!hasSubscription && (
+              <Link 
+                to="/pricing" 
+                className={`btn-ghost ${isActive('/pricing') ? 'bg-muted' : ''}`}
+                data-testid="nav-pricing"
+              >
+                Pricing
+              </Link>
+            )}
             
             {isAuthenticated && hasSubscription && (
               <>
