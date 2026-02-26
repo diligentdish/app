@@ -36,6 +36,9 @@ JWT_ALGORITHM = "HS256"
 STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 
+# LLM Configuration
+EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY')
+
 # Admin emails - users with these emails get admin role
 ADMIN_EMAILS = os.environ.get('ADMIN_EMAILS', 'admin@blessedbelly.com').split(',')
 
