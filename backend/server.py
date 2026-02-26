@@ -236,6 +236,93 @@ def get_base_name(category: str) -> str:
     }
     return names.get(category, "Become Balanced")
 
+async def generate_ai_recommendation(user_name: str, signal: str, base_category: str, recent_actions: List[str] = None) -> Dict:
+    """Generate personalized AI recommendation based on user's body signal"""
+    
+    signal_descriptions = {
+        "stressed": "feeling stressed or overwhelmed",
+        "low_energy": "experiencing low energy or fatigue",
+        "cravings": "having food cravings",
+        "digestion": "having digestive discomfort or bloating",
+        "normal": "feeling relatively normal today"
+    }
+    
+    base_descriptions = {
+        "B": "Become Balanced - focusing on balanced meals, blood sugar stability, and the 80/20 nutrition approach",
+        "A": "Activate Awareness - focusing on mindful eating, stress awareness, and gratitude",
+        "S": "Support Strength - focusing on simple daily movement and gentle strength",
+        "E": "Engage Your Gut - focusing on gut health, fiber, and digestion support"
+    }
+    
+    recent_context = ""
+    if recent_actions and len(recent_actions) > 0:
+        recent_context = f"\n\nRecent actions this user has received (avoid repeating): {', '.join(recent_actions[-5:])}"
+    
+    system_prompt = """You are a holistic nutritionist and wellness coach for Blessed Belly, a faith-informed metabolic health app for busy Christian women who want to lose stubborn belly fat without dieting or calorie counting.
+
+Your role is to provide ONE simple, strategic, science-backed action that creates an immediate win. Your advice should:
+1. Be specific, actionable, and doable in a busy woman's day
+2. Include the scientific "why" in plain language (2-3 sentences)
+3. Give concrete examples they can use RIGHT NOW
+4. Build mindfulness and body awareness over time
+5. Be warm, empowering, and grace-filled (not preachy)
+6. Never mention calories, dieting, or restriction
+7. Focus on adding good things, not removing "bad" things
+
+Always respond in valid JSON format with these exact fields:
+{
+    "action_text": "The ONE specific action for today (1-2 sentences)",
+    "why_it_helps": "Science-backed explanation in plain language (2-3 sentences)",
+    "examples": "Specific, practical examples they can use immediately (2-3 sentences)",
+    "movement_text": "One simple movement suggestion related to the action (1 sentence)",
+    "verse_text": "A relevant scripture verse about the body, health, rest, or God's care",
+    "verse_ref": "The scripture reference (e.g., 'Proverbs 3:5-6')"
+}"""
+
+    user_prompt = f"""Generate a personalized recommendation for {user_name}.
+
+Current state: She is {signal_descriptions.get(signal, 'checking in')}.
+Focus area: {base_descriptions.get(base_category, 'general wellness')}
+{recent_context}
+
+Provide ONE strategic action that will give her an immediate win and help her body feel better. Make it specific to her current state, backed by science, and easy to implement in her busy day."""
+
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"recommendation_{uuid.uuid4().hex[:8]}",
+            system_message=system_prompt
+        ).with_model("openai", "gpt-4o")
+        
+        response = await chat.send_message(UserMessage(text=user_prompt))
+        
+        # Parse the JSON response
+        # Clean up response if needed (remove markdown code blocks)
+        response_text = response.strip()
+        if response_text.startswith("```json"):
+            response_text = response_text[7:]
+        if response_text.startswith("```"):
+            response_text = response_text[3:]
+        if response_text.endswith("```"):
+            response_text = response_text[:-3]
+        response_text = response_text.strip()
+        
+        recommendation = json.loads(response_text)
+        
+        return {
+            "action_text": recommendation.get("action_text", ""),
+            "why_it_helps": recommendation.get("why_it_helps", ""),
+            "examples": recommendation.get("examples", ""),
+            "movement_text": recommendation.get("movement_text", ""),
+            "verse_text": recommendation.get("verse_text", ""),
+            "verse_ref": recommendation.get("verse_ref", "")
+        }
+        
+    except Exception as e:
+        logger.error(f"AI recommendation error: {e}")
+        # Fallback to a default recommendation
+        return None
+
 # ============== AUTH ENDPOINTS ==============
 
 @api_router.post("/auth/register", response_model=TokenResponse)
