@@ -681,45 +681,74 @@ async def get_subscription_status(request: Request):
 
 @api_router.post("/checkin", response_model=DailyCheckInResponse)
 async def daily_checkin(checkin: CheckInRequest, request: Request):
-    """Submit daily check-in and get today's BASEline"""
+    """Submit daily check-in and get today's AI-personalized BASEline"""
     user = await require_subscription(request)
     
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     base_category = get_base_category(checkin.signal)
     
-    # Get random action for this BASE category
-    actions = await db.baseline_actions.find(
-        {"base_category": base_category},
-        {"_id": 0}
-    ).to_list(100)
+    # Get user's recent actions to avoid repetition
+    recent_checkins = await db.daily_checkins.find(
+        {"user_id": user["user_id"]},
+        {"_id": 0, "action_text": 1}
+    ).sort("created_at", -1).limit(5).to_list(5)
+    recent_actions = [c.get("action_text", "") for c in recent_checkins if c.get("action_text")]
     
-    if not actions:
-        # Use default if no actions in DB
+    # Try AI-generated personalized recommendation first
+    ai_recommendation = await generate_ai_recommendation(
+        user_name=user.get("name", "friend").split()[0],
+        signal=checkin.signal,
+        base_category=base_category,
+        recent_actions=recent_actions
+    )
+    
+    if ai_recommendation:
+        # Use AI recommendation
         action = {
-            "action_id": "default",
-            "action_text": "Take three deep breaths before your next meal",
-            "movement_text": "Take a 10-minute walk after eating"
+            "action_id": f"ai_{uuid.uuid4().hex[:8]}",
+            "action_text": ai_recommendation["action_text"],
+            "why_it_helps": ai_recommendation["why_it_helps"],
+            "examples": ai_recommendation["examples"],
+            "movement_text": ai_recommendation["movement_text"]
         }
-    else:
-        action = random.choice(actions)
-    
-    # Get random verse for this category
-    verses = await db.verses.find(
-        {"category": {"$in": [base_category, "general"]}},
-        {"_id": 0}
-    ).to_list(100)
-    
-    if not verses:
-        # Use default verse
         verse = {
-            "verse_id": "default",
-            "verse_text": "Do you not know that your bodies are temples of the Holy Spirit?",
-            "verse_ref": "1 Corinthians 6:19"
+            "verse_id": f"ai_{uuid.uuid4().hex[:8]}",
+            "verse_text": ai_recommendation["verse_text"],
+            "verse_ref": ai_recommendation["verse_ref"]
         }
     else:
-        verse = random.choice(verses)
+        # Fallback to database actions if AI fails
+        actions = await db.baseline_actions.find(
+            {"base_category": base_category},
+            {"_id": 0}
+        ).to_list(100)
+        
+        if not actions:
+            action = {
+                "action_id": "default",
+                "action_text": "Take three deep breaths before your next meal",
+                "why_it_helps": "Deep breathing activates your parasympathetic nervous system, shifting your body from stress mode to rest-and-digest mode.",
+                "examples": "Before you take your first bite, close your eyes, breathe in slowly for 4 counts, hold for 4, exhale for 4. Repeat 3 times.",
+                "movement_text": "Take a 10-minute walk after eating"
+            }
+        else:
+            action = random.choice(actions)
+        
+        verses = await db.verses.find(
+            {"category": {"$in": [base_category, "general"]}},
+            {"_id": 0}
+        ).to_list(100)
+        
+        if not verses:
+            verse = {
+                "verse_id": "default",
+                "verse_text": "Do you not know that your bodies are temples of the Holy Spirit?",
+                "verse_ref": "1 Corinthians 6:19"
+            }
+        else:
+            verse = random.choice(verses)
     
-    # Create check-in record
+    # Create check-in record with the action text for future reference
     check_in_id = f"checkin_{uuid.uuid4().hex[:12]}"
     check_in_doc = {
         "check_in_id": check_in_id,
@@ -728,7 +757,13 @@ async def daily_checkin(checkin: CheckInRequest, request: Request):
         "signal": checkin.signal,
         "base_category": base_category,
         "action_id": action.get("action_id", "default"),
-        "verse_id": verse.get("verse_id", "default"),
+        "action_text": action.get("action_text", ""),  # Store for avoiding repetition
+        "why_it_helps": action.get("why_it_helps", ""),
+        "examples": action.get("examples", ""),
+        "movement_text": action.get("movement_text", ""),
+        "verse_text": verse.get("verse_text", ""),
+        "verse_ref": verse.get("verse_ref", ""),
+        "ai_generated": ai_recommendation is not None,
         "created_at": datetime.now(timezone.utc).isoformat()
     }
     
