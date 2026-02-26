@@ -811,29 +811,44 @@ async def get_today_checkin(request: Request):
     if not checkin:
         return {"has_checkin": False}
     
-    # Get action details
-    action = await db.baseline_actions.find_one(
-        {"action_id": checkin.get("action_id")},
-        {"_id": 0}
-    )
-    
-    if not action:
+    # If AI-generated, use stored data; otherwise fetch from DB
+    if checkin.get("ai_generated"):
+        # Use the stored AI recommendation
         action = {
-            "action_text": "Take three deep breaths before your next meal",
-            "movement_text": "Take a 10-minute walk after eating"
+            "action_text": checkin.get("action_text", ""),
+            "why_it_helps": checkin.get("why_it_helps", ""),
+            "examples": checkin.get("examples", ""),
+            "movement_text": checkin.get("movement_text", "")
         }
-    
-    # Get verse details
-    verse = await db.verses.find_one(
-        {"verse_id": checkin.get("verse_id")},
-        {"_id": 0}
-    )
-    
-    if not verse:
         verse = {
-            "verse_text": "Do you not know that your bodies are temples of the Holy Spirit?",
-            "verse_ref": "1 Corinthians 6:19"
+            "verse_text": checkin.get("verse_text", ""),
+            "verse_ref": checkin.get("verse_ref", "")
         }
+    else:
+        # Fetch from database for non-AI recommendations
+        action = await db.baseline_actions.find_one(
+            {"action_id": checkin.get("action_id")},
+            {"_id": 0}
+        )
+        
+        if not action:
+            action = {
+                "action_text": "Take three deep breaths before your next meal",
+                "why_it_helps": "Deep breathing activates your rest-and-digest system.",
+                "examples": "Breathe in for 4 counts, hold for 4, exhale for 4.",
+                "movement_text": "Take a 10-minute walk after eating"
+            }
+        
+        verse = await db.verses.find_one(
+            {"verse_id": checkin.get("verse_id")},
+            {"_id": 0}
+        )
+        
+        if not verse:
+            verse = {
+                "verse_text": "Do you not know that your bodies are temples of the Holy Spirit?",
+                "verse_ref": "1 Corinthians 6:19"
+            }
     
     return {
         "has_checkin": True,
